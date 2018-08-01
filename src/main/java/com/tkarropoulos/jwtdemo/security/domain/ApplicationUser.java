@@ -1,12 +1,11 @@
 package com.tkarropoulos.jwtdemo.security.domain;
 
-import com.tkarropoulos.jwtdemo.utils.PersistableEntity;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "APP_USER")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class ApplicationUser extends PersistableEntity implements Serializable{
 
     @Column(nullable = false)

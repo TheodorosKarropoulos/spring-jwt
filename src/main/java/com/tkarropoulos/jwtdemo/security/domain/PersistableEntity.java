@@ -1,12 +1,15 @@
-package com.tkarropoulos.jwtdemo.utils;
+package com.tkarropoulos.jwtdemo.security.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tkarropoulos.jwtdemo.utils.DateConverter;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 
 @MappedSuperclass
-public class PersistableEntity implements Persistable<Long> {
+abstract public class PersistableEntity implements Persistable<Long> {
 
     @Id
     @Column(name = "ID", nullable = false, unique = true)
@@ -15,9 +18,14 @@ public class PersistableEntity implements Persistable<Long> {
 
     @CreatedDate
     @Convert(converter = DateConverter.class)
+    @Column(updatable = false)
     private Long createdDate;
 
-    protected PersistableEntity() {
+    @LastModifiedDate
+    @Convert(converter = DateConverter.class)
+    private Long updatedDate;
+
+    public PersistableEntity() {
     }
 
     @Override
@@ -37,7 +45,17 @@ public class PersistableEntity implements Persistable<Long> {
         this.createdDate = createdDate;
     }
 
+    public Long getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Long updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
     @Override
+    @Transient
+    @JsonIgnore
     public boolean isNew() {
         return id == null;
     }
