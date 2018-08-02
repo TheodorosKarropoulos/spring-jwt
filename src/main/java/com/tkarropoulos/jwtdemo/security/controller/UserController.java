@@ -3,6 +3,8 @@ package com.tkarropoulos.jwtdemo.security.controller;
 import com.tkarropoulos.jwtdemo.security.domain.ApplicationUser;
 import com.tkarropoulos.jwtdemo.security.repository.UserRepository;
 import com.tkarropoulos.jwtdemo.utils.CustomLoggerMessages;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/users")
+@Api(description = "User controller", tags = "User")
 public class UserController {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -32,6 +35,7 @@ public class UserController {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+    @ApiOperation("User sign up")
     @PostMapping("/sign-up")
     public ResponseEntity<?> signUp(@Valid @RequestBody ApplicationUser user) {
         // Check if user already exists

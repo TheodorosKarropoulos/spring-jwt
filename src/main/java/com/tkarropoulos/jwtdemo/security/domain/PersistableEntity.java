@@ -1,6 +1,7 @@
 package com.tkarropoulos.jwtdemo.security.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tkarropoulos.jwtdemo.utils.DateConverter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -33,6 +34,7 @@ abstract public class PersistableEntity implements Persistable<Long> {
         return id;
     }
 
+    @JsonIgnore
     public void setId(Long id) {
         this.id = id;
     }
@@ -41,6 +43,7 @@ abstract public class PersistableEntity implements Persistable<Long> {
         return createdDate;
     }
 
+    @JsonIgnore
     public void setCreatedDate(Long createdDate) {
         this.createdDate = createdDate;
     }
@@ -49,6 +52,7 @@ abstract public class PersistableEntity implements Persistable<Long> {
         return updatedDate;
     }
 
+    @JsonIgnore
     public void setUpdatedDate(Long updatedDate) {
         this.updatedDate = updatedDate;
     }

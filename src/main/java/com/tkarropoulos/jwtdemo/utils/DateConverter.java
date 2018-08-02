@@ -7,17 +7,11 @@ public class DateConverter implements AttributeConverter<Long, Date> {
 
     @Override
     public Date convertToDatabaseColumn(Long longDate) {
-        if (longDate == null) {
-            return null;
-        }
-        return new Date(longDate);
+        return longDate != null ? new Date(longDate) : null;
     }
 
     @Override
-    public Long convertToEntityAttribute(Date date) {
-        if (date == null) {
-            return null;
-        }
-        return date.getTime();
+    public Long convertToEntityAttribute(Date dbDate) {
+        return dbDate != null ? dbDate.getTime() : null;
     }
 }

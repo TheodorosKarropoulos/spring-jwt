@@ -2,16 +2,16 @@ package com.tkarropoulos.jwtdemo.utils;
 
 public class CustomLoggerMessages {
 
-    private String errorMessage;
+    private String loggerMessage;
 
     protected CustomLoggerMessages() {
     }
 
-    public CustomLoggerMessages(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public CustomLoggerMessages(String loggerMessage) {
+        this.loggerMessage = loggerMessage;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getLoggerMessage() {
+        return loggerMessage;
     }
 }
