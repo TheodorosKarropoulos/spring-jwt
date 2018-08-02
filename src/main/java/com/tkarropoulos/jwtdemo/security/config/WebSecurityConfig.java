@@ -15,9 +15,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import static com.tkarropoulos.jwtdemo.security.config.SecurityConstantsConfig.RESET_PASSWORD_URL;
 import static com.tkarropoulos.jwtdemo.security.config.SecurityConstantsConfig.SIGN_UP_URL;
-import static com.tkarropoulos.jwtdemo.security.config.SecurityConstantsConfig.SWAGGER_RESOURCES_URL;
-import static com.tkarropoulos.jwtdemo.security.config.SecurityConstantsConfig.SWAGGER_URL;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -34,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
+                .antMatchers(HttpMethod.POST, SIGN_UP_URL, RESET_PASSWORD_URL).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilterConfig(authenticationManager()))
